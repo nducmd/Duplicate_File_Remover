@@ -1,4 +1,4 @@
-# Check_duplicate_files
+# remove_duplicate_files
 Script to remove duplicate files
 
 ![image](https://user-images.githubusercontent.com/110773590/222445398-dab83221-f9cf-49ba-801a-37008cf95af5.png)

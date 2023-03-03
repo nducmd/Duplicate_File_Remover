@@ -47,12 +47,13 @@ EndIf
 ; Start time
 FileWriteLine($hFile,"Check duplicate files by ayaducy")
 FileWriteLine($hFile,"Start at:" & _NowCalc())
-
+FileWriteLine($hFile,"--------------------------------")
 ; Close the log file handle
 FileClose($hFile)
 
 ; Get all the files in the directory
 Local $aFiles = _FileListToArray($sDirPath, "*", $FLTA_FILES)
+
 
 ; Create an empty array to store the MD5 hashes of the files
 Local $aHashes[1]
@@ -63,20 +64,20 @@ Local $iDeletedFiles = 0
 
 If StringUpper($sFlag) = "M" Then
 	; Create the backup folder if it does not exist
-	If Not FileExists($sDirPath & "\_backup") Then
-		DirCreate($sDirPath & "\_backup")
+	If Not FileExists($sDirPath & "\_duplicate") Then
+		DirCreate($sDirPath & "\_duplicate")
 	EndIf
 
 	For $i = 0 To UBound($aFiles) - 1
 
 		; Generate the MD5 hash of the file
-		Local $sHash = _Crypt_HashFile($sDirPath & "\" & $aFiles[$i], $CALG_MD5)
+		Local $sHash = _Crypt_HashFile($sDirPath & "\" & $aFiles[$i], $CALG_SHA_256)
 
 		; Check if the hash already exists in the array
 		If _ArraySearch($aHashes, $sHash) >= 0 Then
 
 			; Move the duplicate file
-			FileMove($sDirPath & "\" & $aFiles[$i], $sDirPath & "\_backup\" & $aFiles[$i], $FC_CREATEPATH)
+			FileMove($sDirPath & "\" & $aFiles[$i], $sDirPath & "\_duplicate\" & $aFiles[$i], $FC_CREATEPATH)
 
 			; Increment the counter for moved files
 			$iDeletedFiles += 1
@@ -94,12 +95,13 @@ If StringUpper($sFlag) = "M" Then
 		EndIf
 
 	Next
+
 Else
 
 	For $i = 0 To UBound($aFiles) - 1
 
 		; Generate the MD5 hash of the file
-		Local $sHash = _Crypt_HashFile($sDirPath & "\" & $aFiles[$i], $CALG_MD5)
+		Local $sHash = _Crypt_HashFile($sDirPath & "\" & $aFiles[$i], $CALG_SHA_256)
 
 		; Check if the hash already exists in the array
 		If _ArraySearch($aHashes, $sHash) >= 0 Then
@@ -124,14 +126,13 @@ Else
 	Next
 EndIf
 
-; Loop through each file in the directory
-
 
 ; Remove the first element of the array (it is empty)
 _ArrayDelete($aHashes, 0)
 
 ; End time
 Local $hFile = FileOpen($sDirPath & "\_log.txt", $FO_APPEND)
+FileWriteLine($hFile,"--------------------------------")
 FileWriteLine($hFile,"End at:" & _NowCalc())
 FileClose($hFile)
 

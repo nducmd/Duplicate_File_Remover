@@ -1,6 +1,7 @@
 # remove_duplicate_files
-Script to remove duplicate files
+Script to remove duplicate files based on SHA256
 
+# How to use
 ![image](https://user-images.githubusercontent.com/110773590/222445398-dab83221-f9cf-49ba-801a-37008cf95af5.png)
 - Mode selection
 >Enter D if you want to delete duplicate files<br />

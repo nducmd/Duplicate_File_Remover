@@ -1,3 +1,7 @@
+<p align="center">
+	<img alt="dfr" src="https://github.com/nducmd/Duplicate_File_Remover/assets/110773590/819b8ccb-defa-4e2c-8a03-8758fcf8a131" />
+</p>
+
 # Duplicate File Remover
 Script to remove duplicate files based on SHA256
 

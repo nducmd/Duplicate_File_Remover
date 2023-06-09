@@ -3,7 +3,7 @@ Script to remove duplicate files based on SHA256
 
 ### Install
 Download binaries:
-[Release Page][https://github.com/nducmd/remove_duplicate_files/releases]
+[Release Page](https://github.com/nducmd/remove_duplicate_files/releases)
 
 ### Usage
 Available Commands:
